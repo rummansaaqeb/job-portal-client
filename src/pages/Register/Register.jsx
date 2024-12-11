@@ -1,18 +1,37 @@
 import Lottie from 'lottie-react';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import registerLottieData from '../../assets/lottie/register.json';
+import AuthContext from '../../context/AuthContext/AuthContext';
 const Register = () => {
 
+    const { createUser } = useContext(AuthContext);
+    const [validPassword, setValidPassword] = useState('');
+
     const handleRegister = (e) => {
+
+
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log({email, password});
+        const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/; // /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/
 
-        // password validation: 
-        
+
+        if (!regex.test(password)) {
+            return setValidPassword("Password Must Be 6 Characters Long and Contain At Least One Uppercase And Lowercase Characters");
+        }
+
+        // password validation:
+        // show password validation error here
+        createUser(email, password) 
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(error => {
+            console.log(error.message);
+        })
+
     }
 
     return (
@@ -38,6 +57,9 @@ const Register = () => {
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
+                        </div>
+                        <div>
+                            <h2 className='text-red-600 font-semibold'>{validPassword}</h2>
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
