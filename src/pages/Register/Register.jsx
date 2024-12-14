@@ -2,6 +2,7 @@ import Lottie from 'lottie-react';
 import React, { useContext, useState } from 'react';
 import registerLottieData from '../../assets/lottie/register.json';
 import AuthContext from '../../context/AuthContext/AuthContext';
+import SocialLogin from '../shared/SocialLogin';
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
@@ -24,13 +25,13 @@ const Register = () => {
 
         // password validation:
         // show password validation error here
-        createUser(email, password) 
-        .then(result => {
-            console.log(result.user);
-        })
-        .catch(error => {
-            console.log(error.message);
-        })
+        createUser(email, password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
 
     }
 
@@ -65,6 +66,7 @@ const Register = () => {
                             <button className="btn btn-primary">Register</button>
                         </div>
                     </form>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
