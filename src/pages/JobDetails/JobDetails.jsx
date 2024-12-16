@@ -3,11 +3,11 @@ import { CiMedal } from 'react-icons/ci';
 import { FaCoffee, FaMoneyBill, FaUser } from 'react-icons/fa';
 import { FaBuildingColumns, FaLocationDot } from 'react-icons/fa6';
 import { MdOutlineWatchLater } from 'react-icons/md';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const JobDetails = () => {
 
-    const { title, company, applicationDeadline, company_logo, requirements, category, salaryRange, jobType, responsibilities, location } = useLoaderData();
+    const { _id, title, company, applicationDeadline, company_logo, requirements, category, salaryRange, jobType, responsibilities, location } = useLoaderData();
 
     return (
         <div className='mt-24 mb-24'>
@@ -16,7 +16,7 @@ const JobDetails = () => {
             </div>
             <div className='flex items-center justify-between'>
                 <h2 className='font-bold text-3xl mt-5'>{title}</h2>
-                <button className='btn btn-primary font-bold text-lg btn-lg'>Apply Now</button>
+                <Link to={`/jobApply/${_id}`}><button className='btn btn-primary font-bold text-lg btn-lg'>Apply Now</button></Link>
             </div>
             <div className='w-3/4 border rounded-xl p-4 mt-12'>
                 <h3>Employment Information</h3>
