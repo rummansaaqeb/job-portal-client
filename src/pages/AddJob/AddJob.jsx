@@ -1,10 +1,22 @@
 import React from 'react';
 
 const AddJob = () => {
+
+    const handleAddJob = e => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const initialData = Object.fromEntries(formData.entries());
+        console.log(initialData);
+        const { min, max, currency, ...newJob } = initialData;
+        console.log(newJob);
+        newJob.salaryRange = { min, max, currency };
+        console.log(newJob);
+    }
+
     return (
         <div>
             <h2 className="text-3xl">Post A New Job</h2>
-            <form className="card-body">
+            <form onSubmit={handleAddJob} className="card-body">
                 {/* Job Title */}
                 <div className="form-control">
                     <label className="label">
@@ -56,7 +68,7 @@ const AddJob = () => {
                         <input type="text" name='max' placeholder="Max" className="input input-bordered" required />
                     </div>
                     <div className="form-control">
-                        <select className="select select-ghost w-full max-w-xs">
+                        <select name='currency' className="select select-ghost w-full max-w-xs">
                             <option disabled selected>Currency</option>
                             <option>BDT</option>
                             <option>USD</option>
@@ -83,14 +95,35 @@ const AddJob = () => {
                     <label className="label">
                         <span className="label-text">Job Requirements</span>
                     </label>
-                    <textarea className="textarea textarea-bordered" placeholder="Put each requirements in a new line" name='description' required></textarea>
+                    <textarea className="textarea textarea-bordered" placeholder="Put each requirements in a new line" name='requirements' required></textarea>
                 </div>
                 {/* Responsibilities */}
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Job Responsibilities</span>
                     </label>
-                    <textarea className="textarea textarea-bordered" placeholder="Write each responsibilities in a new line" name='description' required></textarea>
+                    <textarea className="textarea textarea-bordered" placeholder="Write each responsibilities in a new line" name='responsibilities' required></textarea>
+                </div>
+                {/* HR Name */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">HR Name</span>
+                    </label>
+                    <input type="text" name='hr_name' placeholder="HR Name" className="input input-bordered" required />
+                </div>
+                {/* HR Email */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">HR Email</span>
+                    </label>
+                    <input type="email" name='hr_email' placeholder="HR Email" className="input input-bordered" required />
+                </div>
+                {/* Company Logo */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Company Logo URL</span>
+                    </label>
+                    <input type="text" name='company_logo' placeholder="Paste Company Logo URL" className="input input-bordered" required />
                 </div>
                 {/* Submit button */}
                 <div className="form-control mt-6">
