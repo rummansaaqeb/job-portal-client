@@ -38,7 +38,7 @@ const AddJob = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    navigate('/');
+                    navigate('/myPostedJobs');
                 }
             })
     }
@@ -147,6 +147,13 @@ const AddJob = () => {
                         <span className="label-text">HR Email</span>
                     </label>
                     <input type="email" name='hr_email' placeholder="HR Email" className="input input-bordered" defaultValue={user?.email} required />
+                </div>
+                {/* Application Deadline */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Deadline</span>
+                    </label>
+                    <input type="date" name='applicationDeadline' placeholder="Deadline" className="input input-bordered" required />
                 </div>
                 {/* Company Logo */}
                 <div className="form-control">
