@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const MyApplications = () => {
     const { user } = useAuth();
     const [jobs, setJobs] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/job-application?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setJobs(data);
-                console.log(data);
-            })
+        // fetch(`http://localhost:5000/job-application?email=${user.email}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setJobs(data);
+        //         console.log(data);
+        //     })
+
+
+        axios.get(`http://localhost:5000/job-application?email=${user.email}`, { withCredentials: true })
+            .then(res => console.log(setJobs(res.data)))
+
     }, [user.email])
 
 
