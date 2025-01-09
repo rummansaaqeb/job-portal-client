@@ -5,8 +5,10 @@ import { BiSearch } from 'react-icons/bi';
 
 const AllJob = () => {
     const [sort, setSort] = useState(false);
+    const [minSalary, setMinSalary] = useState("");
+    const [maxSalary, setMaxSalary] = useState("");
     const [search, setSearch] = useState("");
-    const { jobs, loading } = useJobs(sort, search);
+    const { jobs, loading } = useJobs(sort, search, minSalary, maxSalary);
     console.log(sort);
     if (loading) {
         return <span className='loading loading-spinner loading-lg'></span>
@@ -18,6 +20,10 @@ const AllJob = () => {
                 <button onClick={() => setSort(!sort)} className={`btn btn-neutral ${sort && 'btn-success'}`}>{sort === true ? 'Sorted By Salary' : 'Sort By Salary'}</button>
                 <BiSearch className='w-7 h-7'></BiSearch>
                 <input onKeyUp={(e) => setSearch(e.target.value)} type="text" className='input w-full max-w-2xl' name="" placeholder='Search Jobs By Location' />
+                <div className='space-y-3'>
+                    <input onKeyUp={(e) => setMinSalary(e.target.value)} type="text" className='input w-full max-w-xs' name="" placeholder='Min Salary' />
+                    <input onKeyUp={(e) => setMaxSalary(e.target.value)} type="text" className='input w-full max-w-xs' name="" placeholder='Max Salary' />
+                </div>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
                 {
